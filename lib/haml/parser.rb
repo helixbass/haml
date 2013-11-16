@@ -15,6 +15,8 @@ module Haml
     # Designates a `<div>` element with the given id.
     DIV_ID          = ?#
 
+    DIV_ATTRS = ?{
+
     # Designates an XHTML/XML comment.
     COMMENT         = ?/
 
@@ -51,6 +53,7 @@ module Haml
       ELEMENT,
       DIV_CLASS,
       DIV_ID,
+      DIV_ATTRS,
       COMMENT,
       DOCTYPE,
       SCRIPT,
@@ -216,6 +219,7 @@ module Haml
     def process_line(line)
       case line.text[0]
       when DIV_CLASS; push div(line)
+      when DIV_ATTRS; push div(line)
       when DIV_ID
         return push plain(line) if line.text[1] == ?{
         push div(line)
